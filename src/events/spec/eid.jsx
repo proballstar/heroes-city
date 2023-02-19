@@ -2,6 +2,13 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import Nav from "../../layout/Nav";
+import { MapPinIcon, 
+    CalendarDaysIcon, 
+    LinkIcon, 
+    UserIcon, 
+    HeartIcon,
+    PaperAirplaneIcon 
+} from '@heroicons/react/24/outline'
 
 function SpecificEvent() {
     
@@ -34,18 +41,26 @@ function SpecificEvent() {
     
     return (
         <div>
-            <h1>{details.title}</h1>
-            <div dangerouslySetInnerHTML={{__html: details.description}} />
-            <div>
-                Details:
-                <p>{details.date} @ {details.time}</p>
-                <p>{details.location}</p>
+           <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+              {details.title}
+            </h1>
+            <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+                <div dangerouslySetInnerHTML={{__html: details.description}} />
+            </p>
+            <div className="p-2 font-semibold flex">
+                  <CalendarDaysIcon width={30} className="p-1" />
+                  When: {details.date} {" @ "} {details.time}
+            </div>
+            <div className="p-2 font-semibold flex">
+                  <MapPinIcon width={30} className="p-1" />
+                  Address: {" "} {JSON.stringify(details.location)}
             </div>
             {Array.isArray(details.links) && details.links.map((lin, idx) => {
                 return (
                     <div>
-                        <a href={lin}>
-                            Link {idx+1}
+                        <a className="p-2 font-semibold flex" href={lin}>
+                            <LinkIcon width={30} className="p-1" />
+                            To: {" "} Link {idx+1}                       
                         </a>
                     </div>
                 )
@@ -53,19 +68,19 @@ function SpecificEvent() {
 
             {Array.isArray(details.joins) && details.joins.map((j, idx) => {
                 return (
-                    <div>
-                        {j.dn}
+                    <div className="p-2 font-semibold flex">
+                        <UserIcon width={30} className="p-1" />
+                        {" "} {JSON.stringify(details.j.dn)}
                     </div>
                 )
             })}
-            <button onClick={async () => await handleJoin()}>
-                Join this event
+            <button className="p-2 font-semibold flex" onClick={async () => await handleLike()}>
+                  <HeartIcon width={30} className="p-1" />
+                  Like: {" "} {JSON.stringify(details.lc)}
             </button>
-            <div>
-                Likes: {details.lc}
-            </div>
-            <button onClick={async () => await handleLike()}>
-                Like this event
+            <button className="p-2 font-semibold flex" onClick={async () => await handleJoin()}>
+                  <PaperAirplaneIcon width={30} className="p-1" />
+                  Join this event
             </button>
         </div>
     )
