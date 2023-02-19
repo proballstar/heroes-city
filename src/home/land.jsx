@@ -3,8 +3,8 @@ import Nav from "../layout/Nav"
 
 function Home() {
     return (
-        <div>
-            Hello
+        <div className="m-3 p-3">
+            Welcome to Heroes City!!
         </div>
     )
 }

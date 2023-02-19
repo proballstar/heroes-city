@@ -4,7 +4,8 @@ import Nav from "../layout/Nav"
 
 function Home() {
     return (
-        <div>
+        <div className="m-3 p-3">
+            Welcome to Heroes City!!
             <div id="default-carousel" className="relative" data-carousel="static">
     <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
         <div className="hidden duration-700 ease-in-out" data-carousel-item>
