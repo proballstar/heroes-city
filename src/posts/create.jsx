@@ -3,6 +3,7 @@ import { getAuth } from 'firebase/auth'
 import { useState } from 'react'
 import Forms from '../events/form';
 import Nav from '../layout/Nav';
+import { ArrowPathIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
 
 function CreatePost() {
     
@@ -38,12 +39,34 @@ function CreatePost() {
     return (
         <div style={{ width: '100vh' }}>
             <form>
+                <p className="text-4xl font-bold m-3">Post an Event or Violation</p>
                 <Forms title="Title" type="text" value={title} change={setTitle} />
                 <Forms title="Description" type="textarea" value={desc} change={setDesc} />
                 <Forms title="Content" type="textarea" value={content} change={setContent} />
-                <button onClick={(e) => handleSubmit(e)} disabled={submitted}>
-                    Submit
-                </button>
+                <button
+                        className="outline-none animate-bounce p-2 border-2 border-green-900 font-semibold text-green-800 rounded-lg m-2 outline-none"
+                        onClick={() => handleSubmit()}
+                        disabled={submitted}
+                    >
+                        <div className="flex">
+                            {submitted ? (
+                                <div>
+                                    {/* <svg width="100" height="100" className="animate-spin">
+                  <path d="M0,50 a1,1 0 0,0 50,0" fill="green" />
+                </svg> */}
+                                    <ArrowPathIcon width={30} className="animate-spin" />
+                                </div>
+                            ) : (
+                                <PlusCircleIcon width={30} />
+                            )}{" "}
+                            <p className="p-1">Add an Event</p>
+                        </div>
+                    </button>
+                    {submitted && (
+                        <div>
+                            <p>You have created a post</p>
+                        </div>
+                    )}
             </form>
         </div>
     )
