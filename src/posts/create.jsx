@@ -39,7 +39,7 @@ function CreatePost() {
     return (
         <div style={{ width: '100vh' }}>
             <form>
-                <p className="text-4xl font-bold m-3">Post an Event or Violation</p>
+                <p className="text-4xl font-bold m-3">Create Post about your favorite hero or topic to facilitate change!</p>
                 <Forms title="Title" type="text" value={title} change={setTitle} />
                 <Forms title="Description" type="textarea" value={desc} change={setDesc} />
                 <Forms title="Content" type="textarea" value={content} change={setContent} />
