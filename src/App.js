@@ -7,70 +7,24 @@ import './index.css';
 import './App.css';
 
 // Events Pages
-import CreateEvents from './events/create';
-import ViewEvents from './events/read';
-import SpecificEvent from './events/spec/eid';
+import Revenue from './financials/revenue';
+import Overview from './financials/overview';
+import Costs from './financials/cost';
 
-import CreatePost from './posts/create';
-import ViewPost from './posts/view';
-import SpecificPost from './posts/spec/pid';
+import AddProduct from './products/add';
+import ProductsCatalog from './products/view';
+import SpecificProduct from './products/spec/pid';
+
+import AddReport from './employees/report/eid'
+import EmployeeCatalog from './employees/view'
 
 import Land from './home/land';
 import Home from './home/home';
+import Cost from './financials/cost';
 
-const Newbie = createBrowserRouter([
-  {
-    path: '/',
-    element: (
-      <Land />
-    ),
-  },
-]);
 
-const Creds = createBrowserRouter([
-  {
-    path: '/events/add',
-    element: ( 
-      <CreateEvents />
-    ),
-  },
-  {
-    path: '/events/read',
-    element: ( 
-      <ViewEvents />
-    ),
-  },
-  {
-    path: '/events/spec/:eid',
-    element: ( 
-      <SpecificEvent />
-    ),
-  },
-  {
-    path: '/posts/create',
-    element: ( 
-      <CreatePost />
-    ),
-  },
-  {
-    path: '/posts/read',
-    element: ( 
-      <ViewPost />
-    ),
-  },
-  {
-    path: '/posts/spec/:pid',
-    element: ( 
-      <SpecificPost />
-    ),
-  },  
-  {
-    path: '/',
-    element: (
-      <Home />
-    ),
-  }
-]);
+
+const Creds = 
 
 
 function App() {

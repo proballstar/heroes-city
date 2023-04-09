@@ -8,40 +8,17 @@ function SpecificEvent() {
     
     const [details, setDetails] = React.useState({});
     const [cContent,, setCContent] = React.useState("");
-
-
-
     const { pid } = useParams();
 
-    async function handleLike() {
-        const auth = getAuth()
-        fetch(`https://Hero-City-Backend.epiccodewizard2.repl.co/events/${pid}/like/${auth.currentUser.uid}`)
-    }
 
     React.useEffect(() => {
-        fetch(`https://Hero-City-Backend.epiccodewizard2.repl.co/posts/${pid}`)
+        fetch(`/products/${pid}`)
             .then(res => res.json())
             .then(data => {
                 const tempData = data;
                 setDetails(tempData);
             })
         }, [pid])
-
-        function comment() {
-            let uid = getAuth().currentUser.uid;
-            let body = JSON.stringify({
-              pid,
-              uid,
-              content: cContent
-            })
-            let headers = new Headers()
-            headers.append('Content-Type', 'application/json')
-            fetch(`https://Hero-City-Backend.epiccodewizard2.repl.co/posts/comments/${pid}`,{
-              headers,
-              body,
-              method: 'POST'
-            })
-          }
         
     
     return (

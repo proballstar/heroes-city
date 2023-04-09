@@ -1,18 +1,21 @@
 import React from 'react';
 import { getAuth } from 'firebase/auth'
 import { useState } from 'react'
-import Forms from '../events/form';
-import Nav from '../layout/Nav';
-import { ArrowPathIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
+import Form from "../../layout/Field"
+import Nav from '../../layout/Nav';
+import { ArrowPathIcon, Icon } from '@heroicons/react/24/outline'
+import { useCookies } from 'react-cookie';
 
 function CreatePost() {
     
-    const [content, setContent] = useState('')
+    const [star, setStar] = useState(0)
     const [desc, setDesc] = useState('')
     const [title, setTitle] = useState('')
+    const [_res, _setRes] = useState('')
     const [submitted, setSubmitted] = React.useState(false);
+    const [cname, setCName] = useCookies(['cname'])
 
-    async function handleSubmit(e) {
+    async function generateEvals(e) {
         
         setSubmitted(true)
 
@@ -20,32 +23,25 @@ function CreatePost() {
         headers.append("Content-Type", "application/json")
 
         let auth = getAuth()
-
-        await fetch(`https://Hero-City-Backend.epiccodewizard2.repl.co/posts/create`, {
-            method: "POST",
-            body: JSON.stringify({
-                uid: auth.currentUser.uid,
-                name: auth.currentUser.displayName,
-                content: content,
-                description: desc,
-                title: title
-            }),
-            headers: headers
-        })
+        let qs = `The employee ${title} has obtained the following point from their manager, with the following ${report} ultimately leading him to recieve a ${star}/5 stars`
+        let params = new URLSearchParams({"q": qs, "prev": title, "cname": cname})
+        let res = await fetch(`/ans?${params.toString()}`)
+        
+        _setRes(res)
+        
         setSubmitted(false)
-
     }
 
     return (
         <div style={{ width: '100vh' }}>
             <form>
                 <p className="text-4xl font-bold m-3">Create Post about your favorite hero or topic to facilitate change!</p>
-                <Forms title="Title" type="text" value={title} change={setTitle} />
-                <Forms title="Description" type="textarea" value={desc} change={setDesc} />
-                <Forms title="Content" type="textarea" value={content} change={setContent} />
+                <Forms title="Full Name" type="text" value={title} change={setTitle} />
+                <Forms title="Report" type="textarea" value={desc} change={setDesc} />
+                <Forms title="Star (out of 5)" type="number" value={star} change={setStar} />
                 <button
                         className="outline-none animate-bounce p-2 border-2 border-green-900 font-semibold text-green-800 rounded-lg m-2 outline-none"
-                        onClick={() => handleSubmit()}
+                        onClick={() => generateEvals()}
                         disabled={submitted}
                     >
                         <div className="flex">
@@ -59,12 +55,12 @@ function CreatePost() {
                             ) : (
                                 <PlusCircleIcon width={30} />
                             )}{" "}
-                            <p className="p-1">Add an Event</p>
+                            <p className="p-1">Evaluate Worker</p>
                         </div>
                     </button>
                     {submitted && (
                         <div>
-                            <p>You have created a post</p>
+                            {_res}
                         </div>
                     )}
             </form>

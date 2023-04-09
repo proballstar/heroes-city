@@ -1,20 +1,24 @@
 export const creds = [
-    {
-        pa: `/events/add`,
-        t: "Add Event"
-    },
-    {
-        pa: `/events/read`,
-        t: "View Events"
-    },
-    {
-        pa: `/posts/create`,
-        t: "Add Post"
-    },
-    {
-        pa: `/posts/read`,
-        t: "View Posts"
-    }
+      {
+        path: '/jobs/catalog',
+        t: `Job Catalog`
+      },
+      {
+        path: '/products/add',
+        t: `Add Product`
+      },
+      {
+        path: '/products/read',
+        t: `Product Catalog`
+      },
+      {
+        path: '/fin/overview',
+        t: `Financials`
+      },  
+      {
+        path: '/',
+        t: `Home`
+      }
 ]
 
 export const home = [
